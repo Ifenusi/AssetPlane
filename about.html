@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - AssetPlane | World's Best Real Estate Platform</title>
+
+  <link rel="stylesheet" href="design-system.css">
+  <link rel="stylesheet" href="dark-mode.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="icon" href="logo.png" type="image/png">
+</head>
+<body>
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" aria-label="Toggle dark mode">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <!-- Professional Navigation -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="AssetPlane Logo">
+        <span>AssetPlane</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="properties.html">Properties</a></li>
+        <li><a href="listings.html">Listings</a></li>
+        <li><a href="assessments.html">Assessments</a></li>
+        <li><a href="agents.html">Agents</a></li>
+        <li><a href="KrafftTalk.html">KrafftTalk</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>About AssetPlane</h1>
+      <p>Empowering Real Estate Excellence Worldwide</p>
+    </div>
+  </section>
+
+  <!-- About Content -->
+  <section class="about-content">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <h2>Our Mission</h2>
+          <p>AssetPlane is dedicated to revolutionizing the real estate industry by providing the world's most advanced platform for property discovery, investment, and management. We combine cutting-edge technology with expert market insights to deliver unparalleled value to our clients.</p>
+          
+          <h3>What Sets Us Apart</h3>
+          <ul class="feature-list">
+            <li><i class="fas fa-check-circle"></i> AI-powered property recommendations</li>
+            <li><i class="fas fa-check-circle"></i> Blockchain-verified property records</li>
+            <li><i class="fas fa-check-circle"></i> Real-time market analytics</li>
+            <li><i class="fas fa-check-circle"></i> Global network of certified agents</li>
+            <li><i class="fas fa-check-circle"></i> 24/7 customer support</li>
+          </ul>
+        </div>
+        
+        <div class="about-stats">
+          <div class="stat-card">
+            <h3>10,000+</h3>
+            <p>Properties Listed</p>
+          </div>
+          <div class="stat-card">
+            <h3>500+</h3>
+            <p>Certified Agents</p>
+          </div>
+          <div class="stat-card">
+            <h3>50+</h3>
+            <p>Countries Served</p>
+          </div>
+          <div class="stat-card">
+            <h3>$2B+</h3>
+            <p>Properties Sold</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <div class="container">
+      <h2>Meet Our Expert Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="member-avatar">
+            <i class="fas fa-user-tie fa-3x"></i>
+          </div>
+          <h3>Expert Agents</h3>
+          <p>Certified professionals worldwide</p>
+        </div>
+        <div class="team-member">
+          <div class="member-avatar">
+            <i class="fas fa-chart-line fa-3x"></i>
+          </div>
+          <h3>Market Analysts</h3>
+          <p>Data-driven insights</p>
+        </div>
+        <div class="team-member">
+          <div class="member-avatar">
+            <i class="fas fa-shield-alt fa-3x"></i>
+          </div>
+          <h3>Security Experts</h3>
+          <p>Blockchain verification</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <h2>Ready to Experience Excellence?</h2>
+      <p>Join thousands of satisfied clients worldwide</p>
+      <div class="cta-actions">
+        <a href="listings.html" class="btn-primary">Browse Properties</a>
+        <a href="contact.html" class="btn-secondary">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 AssetPlane - World's Best Real Estate Platform</p>
+    </div>
+  </footer>
+
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-indicator"></div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+  <script>
+    // Initialize theme on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      
+      const themeToggle = document.querySelector('.theme-toggle');
+      const icon = themeToggle.querySelector('i');
+      icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    });
+  </script>
+</body>
+</html>

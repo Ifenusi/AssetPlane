@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expert Agents - AssetPlane | World's Best Real Estate Platform</title>
+  
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="design-system.css">
+  <link rel="stylesheet" href="dark-mode.css">
+  <link rel="stylesheet" href="enhanced-styles.css">
+  <link rel="stylesheet" href="agents-enhanced.css">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="logo.png" type="image/png">
+</head>
+<body>
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" aria-label="Toggle dark mode">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <!-- Professional Navigation -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="AssetPlane Logo">
+        <span>AssetPlane</span>
+      </a>
+      
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="properties.html">Properties</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="agents.html" class="active">Find Agents</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      
+      <div class="nav-buttons">
+        <a href="login.html" class="btn secondary">Login</a>
+        <a href="register.html" class="btn primary">Register</a>
+      </div>
+      
+      <!-- Mobile Menu Toggle -->
+      <div class="menu-toggle" id="mobile-menu">
+        <i class="fas fa-bars"></i>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Enhanced Hero Section -->
+  <section class="hero agents-hero enhanced">
+    <div class="hero-content">
+      <h1>Expert Agents</h1>
+      <p class="hero-subtitle">Connect with certified real estate professionals worldwide</p>
+      <p class="hero-description">Find the perfect agent to guide your property journey with our advanced matching system</p>
+      <div class="hero-actions">
+        <a href="#agents-grid" class="btn primary">Browse Agents</a>
+        <a href="register.html?role=realtor" class="btn secondary">Become an Agent</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enhanced Agents Grid -->
+  <section id="agents-grid" class="agents-section enhanced">
+    <div class="container">
+      <div class="section-header">
+        <h2>Featured Agents</h2>
+        <p class="section-subtitle">Connect with certified real estate professionals worldwide</p>
+        <p class="section-description">Find the perfect agent to guide your property journey with our advanced matching system</p>
+      </div>
+      
+      <div class="agents-filter">
+        <button class="filter-btn active" data-filter="all">All Agents</button>
+        <button class="filter-btn" data-filter="residential">Residential</button>
+        <button class="filter-btn" data-filter="commercial">Commercial</button>
+        <button class="filter-btn" data-filter="luxury">Luxury</button>
+        <button class="filter-btn" data-filter="diaspora">Diaspora Specialist</button>
+      </div>
+      
+      <div class="agents-grid" id="agentsContainer">
+        <!-- Agent cards will be dynamically loaded here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Ready to Find Your Perfect Agent?</h2>
+        <p>Get matched with verified real estate professionals in your area</p>
+        <div class="cta-buttons">
+          <a href="register.html?role=client" class="btn primary">Start Your Search</a>
+          <a href="contact.html" class="btn secondary">Contact Support</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>AssetPlane</h3>
+          <p>Your trusted partner in real estate investment and property management.</p>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="properties.html">Properties</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="agents.html">Find Agents</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="assessments.html">Property Assessment</a></li>
+            <li><a href="geo-verification.html">Geo Verification</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4>Connect</h4>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2024 AssetPlane. All rights reserved. | World's Best Real Estate Platform</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="agents.js"></script>
+  <script src="navbar.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

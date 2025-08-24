@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Account • AssetPlane</title>
+  <link rel="stylesheet" href="auth.css"/>
+  <style>
+    /* Enhanced styles for professional functionality */
+    .password-strength {
+      height: 4px;
+      border-radius: 2px;
+      margin-top: 5px;
+      transition: all 0.3s ease;
+    }
+    .strength-weak { background: #ff4757; width: 33%; }
+    .strength-medium { background: #ffa502; width: 66%; }
+    .strength-strong { background: #2ed573; width: 100%; }
+    
+    .error-message {
+      color: #ff4757;
+      font-size: 12px;
+      margin-top: 5px;
+      display: none;
+    }
+    
+    .success-message {
+      color: #2ed573;
+      font-size: 12px;
+      margin-top: 5px;
+      display: none;
+    }
+    
+    .face-verification-container {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    #liveVideo, #liveCanvas {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+    
+    .face-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 250px;
+      border: 2px solid #00d2d3;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    
+    .loading-spinner {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #00d2d3;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: #00d2d3;
+    }
+    
+    .form-control.error {
+      border-color: #ff4757;
+    }
+    
+    .form-control.success {
+      border-color: #2ed573;
+    }
+    
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    
+    .btn-group .btn {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <header class="ap-nav">
+    <a href="index.html" class="brand">
+      <img src="logo.png" alt="AssetPlane" />
+      <span>AssetPlane</span>
+    </a>
+    <nav>
+      <a href="listings.html">Listings</a>
+      <a href="assessments.html">Assessments</a>
+      <a href="kraffttalk.html">KrafftTalk</a>
+      <a href="login.html" class="pill">Login</a>
+    </nav>
+  </header>
+
+  <!-- MULTI-STEP REGISTRATION -->
+  <main class="container">
+    <form id="registerForm" class="wizard" novalidate>
+      <!-- STEP 0: Basic Information -->
+      <section class="step active" data-step="0">
+        <h1>Create your account</h1>
+        <p class="muted">Tell us who you are to personalize your journey.</p>
+
+        <div class="form-group">
+          <label for="fullName">Full name *</label>
+          <input type="text" id="fullName" class="form-control" placeholder="e.g., Ife Olu..." required />
+          <div class="error-message" id="fullNameError">Please enter your full name</div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" class="form-control" placeholder="you@email.com" required />
+          <div class="error-message" id="emailError">Please enter a valid email</div>
+          <div class="success-message" id="emailSuccess">Email is available</div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label for="password">Password *</label>
+            <input type="password" id="password" class="form-control" placeholder="Min 8 characters" minlength="8" required />
+            <div class="password-strength" id="passwordStrength"></div>
+            <div class="error-message" id="passwordError">Password must be at least 8 characters</div>
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm password *</label>
+            <input type="password" id="confirmPassword" class="form-control" placeholder="Re-enter password" required />
+            <div class="error-message" id="confirmPasswordError">Passwords do not match</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="role">I'm registering as *</label>
+          <select id="role" class="form-control" required>
+            <option value="">Select role</option>
+            <option value="client">Client / Buyer</option>
+            <option value="realtor">Realtor / Agent</option>
+            <option value="organization">Organization / Developer</option>
+          </select>
+          <div class="error-message" id="roleError">Please select a role</div>
+        </div>
+
+        <div class="nav-steps">
+          <button type="button" class="btn primary next" onclick="validateStep0()">Continue</button>
+        </div>
+      </section>
+
+      <!-- STEP 1A: Client Preferences -->
+      <section class="step" data-step="1-client">
+        <h2>Buyer Preferences</h2>
+        <p class="muted">Help us tailor properties and advisors for you.</p>
+
+        <div class="form-group">
+          <label for="buyGoal">Are you buying to… *</label>
+          <select id="buyGoal" class="form-control" required>
+            <option value="">Choose one</option>
+            <option value="live">Live / Residence</option>
+            <option value="flip">Flip / Resell</option>
+            <option value="rentals">Rentals / Cashflow</option>
+            <option value="agriculture">Agriculture</option>
+            <option value="commercial">Commercial Use</option>
+            <option value="landbank">Landbanking (hold)</option>
+          </select>
+          <div class="error-message" id="buyGoalError">Please select a goal</div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label for="timeline">When do you plan to develop? *</label>
+            <select id="timeline" class="form-control" required>
+              <option value="">Select timeline</option>
+              <option value="now">Now (0–3 months)</option>
+              <option value="soon">Soon (3–12 months)</option>
+              <option value="later">Later (1–3 years)</option>
+              <option value="long">Long term (3+ years)</option>
+            </select>
+            <div class="error-message" id="timelineError">Please select timeline</div>
+          </div>
+          <div class="form-group">
+            <label for="budget">Budget (₦) *</label>
+            <input type="number" id="budget" class="form-control" min="0" placeholder="e.g., 30000000" required />
+            <div class="error-message" id="budgetError">Please enter your budget</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label for="stateToBuy">Preferred State (to buy) *</label>
+            <select id="stateToBuy" class="form-control" required>
+              <option value="">Select State</option>
+              <option>Lagos</option><option>Abuja (FCT)</option><option>Ogun</option>
+              <option>Oyo</option><option>Rivers</option><option>Anambra</option>
+              <option>Enugu</option><option>Kaduna</option><option>Kano</option>
+            </select>
+            <div class="error-message" id="stateToBuyError">Please select state</div>
+          </div>
+          <div class="form-group">
+            <label for="currentLocation">Current Location (where you live) *</label>
+            <input type="text" id="currentLocation" class="form-control" placeholder="City, Country" required />
+            <div class="error-message" id="currentLocationError">Please enter your location</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="isDiaspora">Diaspora? *</label>
+          <select id="isDiaspora" class="form-control" required>
+            <option value="">Select</option>
+            <option value="no">No</option>
+            <option value="yes">Yes – I live outside the country</option>
+          </select>
+        </div>
+
+        <div id="diasporaBlock" style="display: none;">
+          <div class="form-group">
+            <label for="diasporaInspector">Assign inspector (optional)</label>
+            <select id="diasporaInspector" class="form-control">
+              <option value="">Choose Inspector</option>
+              <option value="lagos-01">Johnson • Lagos</option>
+              <option value="abuja-02">Ade • Abuja</option>
+              <option value="ph-03">Chike • Port Harcourt</option>
+            </select>
+          </div>
+          <label class="checkbox">
+            <input type="checkbox" id="autoVideo" />
+            <span>Require video inspection with timestamp</span>
+          </label>
+        </div>
+
+        <div class="nav-steps">
+          <button type="button" class="btn ghost prev" onclick="prevStep()">Back</button>
+          <button type="button" class="btn primary next" onclick="validateStep1Client()">Continue</button>
+        </div>
+      </section>
+
+      <!-- STEP 1B: Realtor/Organization Verification -->
+      <section class="step" data-step="1-verify">
+        <h2>Verification • Build Trust</h2>
+        <p class="muted">We verify every seller to protect buyers and the market.</p>
+
+        <div class="row">
+          <div class="form-group">
+            <label for="companyName">Company / Business Name *</label>
+            <input type="text" id="companyName" class="form-control" placeholder="Your registered name" required />
+            <div class="error-message" id="companyNameError">Please enter company name</div>
+          </div>
+          <div class="form-group">
+            <label for="regNumber">RC/CAC Number *</label>
+            <input type="text" id="regNumber" class="form-control" placeholder="e.g., RC 1234567" required />
+            <div class="error-message" id="regNumberError">Please enter registration number</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="officeAddress">Office Address *</label>
+          <input type="text" id="officeAddress" class="form-control" placeholder="Street, City, State" required />
+          <div class="error-message" id="officeAddressError">Please enter office address</div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label for="idUpload">Upload means of ID *</label>
+            <input type="file" id="idUpload" class="form-control" accept=".pdf,.png,.jpg,.jpeg" required />
+            <div class="error-message" id="idUploadError">Please upload ID document</div>
+          </div>
+          <div class="form-group">
+            <label for="cacUpload">Upload CAC/Business Document *</label>
+            <input type="file" id="cacUpload" class="form-control" accept=".pdf,.png,.jpg,.jpeg" required />
+            <div class="error-message" id="cacUploadError">Please upload business document</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="bio">Short Bio / Track Record *</label>
+          <textarea id="bio" class="form-control" rows="4" placeholder="Tell clients who you are…" required></textarea>
+          <div class="error-message" id="bioError">Please enter your bio</div>
+        </div>
+
+        <div class="nav-steps">
+          <button type="button" class="btn ghost prev" onclick="prevStep()">Back</button>
+          <button type="button" class="btn primary next" onclick="validateStep1Verify()">Continue</button>
+        </div>
+      </section>
+
+      <!-- STEP 2: Live Face Verification -->
+      <section class="step" data-step="2-face">
+        <h2>Live Face Verification</h2>
+        <p class="muted">Turn on your camera, center your face, then capture.</p>
+
+        <div class="face-verification-container">
+          <video id="liveVideo" autoplay playsinline></video>
+          <canvas id="liveCanvas" style="display: none;"></canvas>
+          <div class="face-overlay"></div>
+        </div>
+
+        <div class="loading-spinner" id="loadingSpinner"></div>
+
+        <div class="btn-group">
+          <button type="button" class="btn" id="startCam" onclick="startCamera()">Start Camera</button>
+          <button type="button" class="btn" id="captureFace" onclick="captureFace()" disabled>Capture</button>
+          <button type="button" class="btn ghost" id="retakeFace" onclick="retakeFace()" style="display: none;">Retake</button>
+        </div>
+
+        <div id="faceVerificationMsg" class="msg"></div>
+
+        <div class="nav-steps">
+          <button type="button" class="btn ghost prev" onclick="prevStep()">Back</button>
+          <button type="button" class="btn primary next" onclick="validateStep2Face()">Continue</button>
+        </div>
+      </section>
+
+      <!-- STEP 3: Policies & Submit -->
+      <section class="step" data-step="3-submit">
+        <h2>Almost done</h2>
+        <ul class="ticks small">
+          <li>We never list unverified properties.</li>
+          <li>Payments are processed within the app via secure partners.</li>
+          <li>Remote inspections include geotagged video when required.</li>
+        </ul>
+
+        <label class="checkbox">
+          <input type="checkbox" id="agree" required />
+          <span>I agree to the Terms, Privacy, and Verification Policy.</span>
+        </label>
+
+        <div class="nav-steps">
+          <button type="button" class="btn ghost prev" onclick="prevStep()">Back</button>
+          <button type="submit" class="btn primary" onclick="submitRegistration()">Create Account</button>
+        </div>
+
+        <div id="registerMsg" class="msg"></div>
+      </section>
+    </form>
+
+    <!-- SIDE PANEL -->
+    <aside class="side-card">
+      <h3>AssetPlane Verification DNA</h3>
+      <ol class="ol">
+        <li>ID + CAC/Business document checks</li>
+        <li>Live face capture (anti-spoof)</li>
+        <li>Office address verification (randomized checks)</li>
+        <li>Listing-by-listing document review</li>
+      </ol>
+      <p class="muted small">*This demo stores data locally for MVP testing. Connect your backend to go live.</p>
+    </aside>
+  </main>
+
+  <script>
+    // Enhanced JavaScript for full functionality
+    let currentStep = 0;
+    let cameraStream = null;
+    let capturedFaceData = null;
+
+    // Password strength checker
+    function checkPasswordStrength(password) {
+      let strength = 0;
+      
+      if (password.length >= 8) strength += 1;
+      if (/[a-z]/.test(password)) strength += 1;
+      if (/[A-Z]/.test(password)) strength += 1;
+      if (/[0-9]/.test(password)) strength += 1;
+      if (/[^A-Za-z0-9]/.test(password)) strength += 1;
+      
+      const strengthBar = document.getElementById('passwordStrength');
+      if (strengthBar) {
+        if (strength < 2) {
+          strengthBar.className = 'password-strength strength-weak';
+        } else if (strength < 4) {
+          strengthBar.className = 'password-strength strength-medium';
+        } else {
+          strengthBar.className = 'password-strength strength-strong';
+        }
+      }
+    }
+
+    // Email validation and availability check

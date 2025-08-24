@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geo-Verification & Trust System - AssetPlane</title>
+  
+  <!-- Google Maps JavaScript API -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
+  
+  <!-- EXIF reader for drone photo GPS verification -->
+  <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+  
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="enhanced-styles.css">
+  <link rel="stylesheet" href="geo-verification.css">
+  <link rel="icon" href="logo.png" type="image/png">
+</head>
+<body>
+  <!-- Skip to main content -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Navigation -->
+  <header class="site-header" role="banner">
+    <nav class="main-nav" aria-label="Main navigation">
+      <div class="nav-container">
+        <a href="index.html" class="brand" aria-label="AssetPlane Home">
+          <img src="logo.png" alt="AssetPlane" width="40" height="40">
+          <span class="brand__name">AssetPlane</span>
+        </a>
+        
+        <ul class="nav__list" role="menubar">
+          <li class="nav__item" role="none">
+            <a href="index.html" class="nav__link" role="menuitem">Home</a>
+          </li>
+          <li class="nav__item" role="none">
+            <a href="properties.html" class="nav__link" role="menuitem">Properties</a>
+          </li>
+          <li class="nav__item" role="none">
+            <a href="agents.html" class="nav__link" role="menuitem">Agents</a>
+          </li>
+          <li class="nav__item" role="none">
+            <a href="contact.html" class="nav__link" role="menuitem">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content" class="main-content">
+    <!-- Hero Section -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__container">
+        <h1 id="hero-title" class="hero__title">Geo-Verification & Trust System</h1>
+        <p class="hero__subtitle">Verify property locations with satellite imagery and drone footage for complete transparency</p>
+      </div>
+    </section>
+
+    <!-- Trust Explanation -->
+    <section class="trust-section">
+      <div class="container">
+        <div class="trust-content">
+          <h2>Why This Matters</h2>
+          <p class="trust-description">
+            AssetPlane exists to remove doubt. Every listing carries a <strong>map pin</strong>, 
+            <strong>satellite overview</strong>, and optional <strong>Street View</strong> so you can 
+            trust what you're seeing—especially from the diaspora. As Nigeria's satellite coverage improves, 
+            your saved coordinates will automatically render with better imagery—no extra work required.
+          </p>
+          
+          <div class="trust-features">
+            <div class="trust-feature">
+              <div class="trust-icon">🛰️</div>
+              <h3>Geocoded by Google</h3>
+              <p>Every property is precisely located using Google Maps API</p>
+            </div>
+            <div class="trust-feature">
+              <div class="trust-icon">📍</div>
+              <h3>Satellite Verification</h3>
+              <p>Compare drone footage with satellite imagery for authenticity</p>
+            </div>
+            <div class="trust-feature">
+              <div class="trust-icon">🔍</div>
+              <h3>Street View Context</h3>
+              <p>Ground-level view where available for complete understanding</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Geo-Verification Interface -->
+    <section class="geo-section">
+      <div class="container">
+        <div class="geo-grid">
+          <!-- Map Section -->
+          <div class="map-section">
+            <h2>Property Location Verification</h2>
+            
+            <!-- Address Search -->
+            <div class="search-controls">
+              <div class="input-group">
+                <label for="property-address">Property Address</label>
+                <input type="text" id="property-address" placeholder="Enter property address or coordinates">
+                <button id="search-address" class="btn btn--primary">Search</button>
+              </div>
+              
+              <div class="input-group">
+                <label for="coordinates">Or Coordinates (lat, lng)</label>
+                <input type="text" id="coordinates" placeholder="6.5244, 3.3792">
+                <button id="search-coords" class="btn btn--primary">Locate</button>
+              </div>
+            </div>
+
+            <!-- Map Controls -->
+            <div class="map-controls">
+              <button id="toggle-satellite" class="btn btn--outline">Satellite View</button>
+              <button id="toggle-streetview" class="btn btn--outline">Street View</button>
+              <button id="reset-map" class="btn btn--outline">Reset</button>
+            </div>
+
+            <!-- Map Container -->
+            <div id="map-container" class="map-container">
+              <div id="map" class="map"></div>
+              <div id="street-view" class="street-view" style="display: none;"></div>
+            </div>
+
+            <!-- Map Status -->
+            <div id="map-status" class="status-box">
+              <strong>Status:</strong> <span id="status-text">Click search to locate property</span>
+            </div>
+          </div>
+
+          <!-- Drone Verification Section -->
+          <div class="verification-section">
+            <h2>Drone Footage Verification</h2>
+            
+            <div class="verification-explanation">
+              <p>
+                Upload a drone photo to verify its GPS coordinates against the map pin. 
+                This helps identify any discrepancies between claimed and actual locations.
+              </p>
+            </div>
+
+            <!-- File Upload -->
+            <div class="upload-section">
+              <label for="drone-photo" class="upload-label">
+                Upload Drone Photo (JPG with GPS data)
+              </label>
+              <input type="file" id="drone-photo" accept="image/jpeg,image/jpg" class="file-input">
+              <button id="verify-photo" class="btn btn--primary" disabled>Verify Photo</button>
+              <button id="clear-photo" class="btn btn--outline">Clear</button>
+            </div>
+
+            <!-- Verification Results -->
+            <div id="verification-results" class="verification-results" style="display: none;">
+              <h3>Verification Results</h3>
+              <div class="result-item">
+                <strong>Photo GPS:</strong> <span id="photo-gps">-</span>
+              </div>
+              <div class="result-item">
+                <strong>Map Pin:</strong> <span id="map-pin">-</span>
+              </div>
+              <div class="result-item">
+                <strong>Distance:</strong> <span id="distance">-</span>
+              </div>
+              <div class="result-item">
+                <strong>Status:</strong> <span id="verification-status" class="status-badge">-</span>
+              </div>
+              <div class="result-explanation">
+                <p id="verification-explanation"></p>
+              </div>
+            </div>
+
+            <!-- Trust Indicators -->
+            <div class="trust-indicators">
+              <h3>Trust Indicators</h3>
+              <div class="indicator-grid">
+                <div class="indicator">
+                  <div class="indicator-icon">✅</div>
+                  <div class="indicator-text">
+                    <strong>Strong Match</strong>
+                    <p>Distance ≤ 150m - GPS coordinates align perfectly</p>
+                  </div>
+                </div>
+                <div class="indicator">
+                  <div class="indicator-icon">⚠️</div>
+                  <div class="indicator-text">
+                    <strong>Review Needed</strong>
+                    <p>Distance 150-500m - Minor discrepancy, investigate further</p>
+                  </div>
+                </div>
+                <div class="indicator">
+                  <div class="indicator-icon">❌</div>
+                  <div class="indicator-text">
+                    <strong>Mismatch</strong>
+                    <p>Distance > 500m - Significant location discrepancy</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Property Showcase -->
+    <section class="showcase-section">
+      <div class="container">
+        <h2>Live Property Verification</h2>
+        <p>See our verification system in action with real properties</p>
+        
+        <div class="showcase-grid">
+          <div class="showcase-item">
+            <h3>Luxury Villa, Lekki</h3>
+            <div class="showcase-content">
+              <div class="showcase-map">
+                <img src="property.jpg" alt="Lekki Villa" class="showcase-image">
+                <div class="showcase-overlay">
+                  <span class="verified-badge">✅ VERIFIED</span>
+                  <p>GPS Match: 45m from claimed location</p>
+                </div>
+              </div>
+              <div class="showcase-details">
+                <p><strong>Claimed Location:</strong> Lekki Phase 1, Lagos</p>
+                <p><strong>Drone GPS:</strong> 6.4375, 3.4556</p>
+                <p><strong>Map Pin:</strong> 6.4378, 3.4561</p>
+                <p><strong>Status:</strong> Strong verification match</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="showcase-item">
+            <h3>Commercial Land, Abuja</h3>
+            <div class="showcase-content">
+              <div class="showcase-map">
+                <img src="field.jpg" alt="Abuja Land" class="showcase-image">
+                <div class="showcase-overlay">
+                  <span class="warning-badge">⚠️ REVIEW</span>
+                  <p>GPS Match: 280m from claimed location</p>
+                </div>
+              </div>
+              <div class="showcase-details">
+                <p><strong>Claimed Location:</strong> Central Business District</p>
+                <p><strong>Drone GPS:</strong> 9.0579, 7.4951</p>
+                <p><strong>Map Pin:</strong> 9.0604, 7.4973</p>
+                <p><strong>Status:</strong> Requires further investigation</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Future-Proofing Section -->
+    <section class="future-section">
+      <div class="container">
+        <div class="future-content">
+          <h2>Future-Proofing Your Investment</h2>
+          <div class="future-grid">
+            <div class="future-item">
+              <h3>🚀 Automatic Updates</h3>
+              <p>As Nigeria's satellite coverage improves, your saved coordinates will automatically render with better imagery—no extra work required.</p>
+            </div>
+            <div class="future-item">
+              <h3>🔒 Permanent Records</h3>
+              <p>All verification data is permanently stored with your property listing for future reference and transparency.</p>
+            </div>
+            <div class="future-item">
+              <h3>📈 Value Protection</h3>
+              <p>Verified properties maintain higher value due to documented authenticity and location accuracy.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-container">
+      <div class="footer-content">
+        <h3>Trust Through Transparency</h3>
+        <p>AssetPlane is committed to providing verified, authentic property information to protect your investment.</p>
+        <a href="properties.html" class="btn btn--cta">Browse Verified Properties</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="geo-verification.js"></script>
+</body>
+</html>

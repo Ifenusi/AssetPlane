@@ -1,0 +1,377 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover premium properties across Africa with verified locations and professional service">
+  <title>Properties - Premium Real Estate Listings | AssetPlane</title>
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="properties.css" as="style">
+  <link rel="preload" href="properties.js" as="script">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="properties.css">
+  <link rel="icon" href="logo.png" type="image/png">
+  
+  <!-- Open Graph for social sharing -->
+  <meta property="og:title" content="Premium Properties - AssetPlane">
+  <meta property="og:description" content="Discover verified properties across Africa with professional service">
+  <meta property="og:image" content="property-og.jpg">
+</head>
+<body>
+  <!-- Skip to main content for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Professional Navigation -->
+  <header class="site-header" role="banner">
+    <nav class="main-nav" aria-label="Main navigation">
+      <div class="nav-container">
+        <a href="index.html" class="brand" aria-label="AssetPlane Home">
+          <img src="logo.png" alt="AssetPlane" width="40" height="40">
+          <span class="brand__name">AssetPlane</span>
+        </a>
+        
+        <ul class="nav__list" role="menubar">
+          <li class="nav__item" role="none">
+            <a href="index.html" class="nav__link" role="menuitem">Home</a>
+          </li>
+          <li class="nav__item" role="none">
+            <a href="agents.html" class="nav__link" role="menuitem">Agents</a>
+          </li>
+          <li class="nav__item" role="none">
+            <a href="assessments.html" class="nav__link" role="menuitem">Assessments</a>
+          </li>
+          <li class="nav__item" role="none">
+            <a href="contact.html" class="nav__link" role="menuitem">Contact</a>
+          </li>
+          <li class="nav__item" role="none">
+            <a href="geo-verification.html" class="nav__link" role="menuitem">geo-verification</a>
+          </li>
+          <li class="nav__item" role="none">
+            <a href="login.html" class="nav__link nav__link--cta" role="menuitem">Login</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content" class="main-content">
+    <!-- Hero Section -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__container">
+        <h1 id="hero-title" class="hero__title">Premium Properties</h1>
+        <p class="hero__subtitle">Discover verified properties across Africa with professional service and transparent pricing</p>
+      </div>
+    </section>
+
+    <!-- Professional Search & Filter Section -->
+    <section class="search-section" aria-labelledby="search-title">
+      <div class="search-container">
+        <h2 id="search-title" class="visually-hidden">Property Search and Filters</h2>
+        
+        <form class="search-form" role="search" aria-label="Property search">
+          <div class="search-form__group">
+            <label for="search-input" class="search-form__label">Search properties</label>
+            <input 
+              type="search" 
+              id="search-input" 
+              class="search-form__input" 
+              placeholder="Enter location, property type, or features..."
+              aria-label="Search properties by location or features"
+            >
+          </div>
+          
+          <div class="filter-grid">
+            <div class="filter-group">
+              <label for="property-type" class="filter-group__label">Property Type</label>
+              <select id="property-type" class="filter-group__select" aria-label="Filter by property type">
+                <option value="">All Types</option>
+                <option value="house">House</option>
+                <option value="apartment">Apartment</option>
+                <option value="land">Land</option>
+                <option value="commercial">Commercial</option>
+                <option value="villa">Villa</option>
+              </select>
+            </div>
+            
+            <div class="filter-group">
+              <label for="price-range" class="filter-group__label">Price Range</label>
+              <select id="price-range" class="filter-group__select" aria-label="Filter by price range">
+                <option value="">All Prices</option>
+                <option value="0-100000">Under $100k</option>
+                <option value="100000-300000">$100k - $300k</option>
+                <option value="300000-500000">$300k - $500k</option>
+                <option value="500000-1000000">$500k - $1M</option>
+                <option value="1000000+">$1M+</option>
+              </select>
+            </div>
+            
+            <div class="filter-group">
+              <label for="location-filter" class="filter-group__label">Location</label>
+              <select id="location-filter" class="filter-group__select" aria-label="Filter by location">
+                <option value="">All Locations</option>
+                <option value="lagos">Lagos, Nigeria</option>
+                <option value="abuja">Abuja, Nigeria</option>
+                <option value="accra">Accra, Ghana</option>
+                <option value="nairobi">Nairobi, Kenya</option>
+              </select>
+            </div>
+            
+            <div class="filter-group">
+              <label for="bedrooms" class="filter-group__label">Bedrooms</label>
+              <select id="bedrooms" class="filter-group__select" aria-label="Filter by number of bedrooms">
+                <option value="">Any</option>
+                <option value="1">1+</option>
+                <option value="2">2+</option>
+                <option value="3">3+</option>
+                <option value="4">4+</option>
+                <option value="5">5+</option>
+              </select>
+            </div>
+          </div>
+          
+          <button type="submit" class="search-form__submit" aria-label="Apply filters">
+            <span class="search-form__submit-text">Search Properties</span>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Property Results Section -->
+    <section class="properties-section" aria-labelledby="properties-title">
+      <div class="properties-container">
+        <h2 id="properties-title" class="visually-hidden">Property Listings</h2>
+        
+        <!-- Loading State -->
+        <div class="loading-state" id="loading-state" aria-hidden="true">
+          <div class="loading-spinner" aria-label="Loading properties"></div>
+          <p class="loading-text">Loading premium properties...</p>
+        </div>
+
+        <!-- Property Grid -->
+        <div class="property-grid" id="property-grid" role="list">
+          <!-- Property Card 1 -->
+          <article class="property-card" role="listitem" data-property-id="1">
+            <figure class="property-card__image-container">
+              <img 
+                src="property.jpg" 
+                alt="Luxury 4-bedroom villa with swimming pool in Lagos"
+                class="property-card__image"
+                loading="lazy"
+                width="400"
+                height="300"
+              >
+              <figcaption class="property-card__badge property-card__badge--featured">Featured</figcaption>
+            </figure>
+            
+            <div class="property-card__content">
+              <header class="property-card__header">
+                <h3 class="property-card__title">Luxury Villa</h3>
+                <p class="property-card__location">
+                  <svg class="property-card__location-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  Lagos, Nigeria
+                </p>
+              </header>
+              
+              <p class="property-card__description">Modern 4-bedroom villa with swimming pool and garden</p>
+              
+              <ul class="property-card__features" role="list">
+                <li class="property-card__feature">
+                  <span class="property-card__feature-value">4</span>
+                  <span class="property-card__feature-label">Beds</span>
+                </li>
+                <li class="property-card__feature">
+                  <span class="property-card__feature-value">3</span>
+                  <span class="property-card__feature-label">Baths</span>
+                </li>
+                <li class="property-card__feature">
+                  <span class="property-card__feature-value">2,500</span>
+                  <span class="property-card__feature-label">sq ft</span>
+                </li>
+              </ul>
+              
+              <footer class="property-card__footer">
+                <p class="property-card__price">$450,000</p>
+                <div class="property-card__actions">
+                  <button class="btn btn--primary" data-action="schedule-inspection" data-property="Luxury Villa">
+                    Schedule Inspection
+                  </button>
+                  <button class="btn btn--secondary" data-action="save-property" data-property="Luxury Villa">
+                    Save
+                  </button>
+                </div>
+              </footer>
+            </div>
+          </article>
+
+          <!-- Property Card 2 -->
+          <article class="property-card" role="listitem" data-property-id="2">
+            <figure class="property-card__image-container">
+              <img 
+                src="buildings urban.jpg" 
+                alt="Modern 2-bedroom apartment in Abuja city center"
+                class="property-card__image"
+                loading="lazy"
+                width="400"
+                height="300"
+              >
+            </figure>
+            
+            <div class="property-card__content">
+              <header class="property-card__header">
+                <h3 class="property-card__title">Urban Apartment</h3>
+                <p class="property-card__location">
+                  <svg class="property-card__location-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  Abuja, Nigeria
+                </p>
+              </header>
+              
+              <p class="property-card__description">City center 2-bedroom apartment with modern amenities</p>
+              
+              <ul class="property-card__features" role="list">
+                <li class="property-card__feature">
+                  <span class="property-card__feature-value">2</span>
+                  <span class="property-card__feature-label">Beds</span>
+                </li>
+                <li class="property-card__feature">
+                  <span class="property-card__feature-value">2</span>
+                  <span class="property-card__feature-label">Baths</span>
+                </li>
+                <li class="property-card__feature">
+                  <span class="property-card__feature-value">1,200</span>
+                  <span class="property-card__feature-label">sq ft</span>
+                </li>
+              </ul>
+              
+              <footer class="property-card__footer">
+                <p class="property-card__price">$280,000</p>
+                <div class="property-card__actions">
+                  <button class="btn btn--primary" data-action="schedule-inspection" data-property="Urban Apartment">
+                    Schedule Inspection
+                  </button>
+                  <button class="btn btn--secondary" data-action="save-property" data-property="Urban Apartment">
+                    Save
+                  </button>
+                </div>
+              </footer>
+            </div>
+          </article>
+
+          <!-- Property Card 3 -->
+          <article class="property-card" role="listitem" data-property-id="3">
+            <figure class="property-card__image-container">
+              <img 
+                src="field.jpg" 
+                alt="Commercial land for development in Accra business district"
+                class="property-card__image"
+                loading="lazy"
+                width="400"
+                height="300"
+              >
+              <figcaption class="property-card__badge property-card__badge--commercial">Commercial</figcaption>
+            </figure>
+            
+            <div class="property-card__content">
+              <header class="property-card__header">
+                <h3 class="property-card__title">Commercial Land</h3>
+                <p class="property-card__location">
+                  <svg class="property-card__location-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  Accra, Ghana
+                </p>
+              </header>
+              
+              <p class="property-card__description">Prime development opportunity in business district</p>
+              
+              <ul class="property-card__features" role="list">
+                <li class="property-card__feature">
+                  <span class="property-card__feature-value">5,000</span>
+                  <span class="property-card__feature-label">sq ft</span>
+                </li>
+                <li class="property-card__feature">
+                  <span class="property-card__feature-label">Commercial</span>
+                </li>
+              </ul>
+              
+              <footer class="property-card__footer">
+                <p class="property-card__price">$150,000</p>
+                <div class="property-card__actions">
+                  <button class="btn btn--primary" data-action="schedule-inspection" data-property="Commercial Land">
+                    Schedule Inspection
+                  </button>
+                  <button class="btn btn--secondary" data-action="save-property" data-property="Commercial Land">
+                    Save
+                  </button>
+                </div>
+              </footer>
+            </div>
+          </article>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="load-more-container">
+          <button class="btn btn--outline load-more-btn" id="load-more" aria-label="Load more properties">
+            Load More Properties
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Professional Contact CTA -->
+    <section class="cta-section" aria-labelledby="cta-title">
+      <div class="cta-container">
+        <h2 id="cta-title" class="cta__title">Need Help Finding Your Perfect Property?</h2>
+        <p class="cta__description">Our expert agents are ready to assist you in finding the ideal property that matches your requirements.</p>
+        <a href="contact.html" class="btn btn--cta">Contact Our Experts</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Professional Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3 class="footer-section__title">AssetPlane</h3>
+          <p class="footer-section__description">Empowering real estate knowledge and investment decisions across Africa.</p>
+        </div>
+        
+        <div class="footer-section">
+          <h4 class="footer-section__title">Quick Links</h4>
+          <ul class="footer-section__list">
+            <li><a href="index.html" class="footer-section__link">Home</a></li>
+            <li><a href="about.html" class="footer-section__link">About</a></li>
+            <li><a href="services.html" class="footer-section__link">Services</a></li>
+            <li><a href="properties.html" class="footer-section__link">Properties</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h4 class="footer-section__title">Contact</h4>
+          <address class="footer-section__address">
+            <a href="mailto:info@assetplane.com" class="footer-section__link">info@assetplane.com</a><br>
+            <a href="tel:+2348139363101" class="footer-section__link">+234 (0)81 3936 3101</a>
+          </address>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 AssetPlane | Customkrafft by Ifeoluwa Olanusi. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="properties.js" defer></script>
+</body>
+</html>

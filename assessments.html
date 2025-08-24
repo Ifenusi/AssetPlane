@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Property Assessments | AssetPlane - Advanced Valuation Tools</title>
+
+  <link rel="stylesheet" href="design-system.css">
+  <link rel="stylesheet" href="dark-mode.css">
+  <link rel="stylesheet" href="enhanced-styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="icon" href="../Images/logo.png" type="image/png">
+</head>
+<body>
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" aria-label="Toggle dark mode">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <!-- Professional Navigation -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="AssetPlane Logo">
+        <span>AssetPlane</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="properties.html">Properties</a></li>
+        <li><a href="listings.html">Listings</a></li>
+        <li><a href="assessments.html" class="active">Assessments</a></li>
+        <li><a href="agents.html">Agents</a></li>
+        <li><a href="KrafftTalk.html">KrafftTalk</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Enhanced Hero Section -->
+  <section class="hero assessment-hero">
+    <div class="hero-content">
+      <h1>Property Assessments</h1>
+      <p class="hero-subtitle">Advanced AI-powered property valuation tools</p>
+      <p class="hero-description">Get instant, accurate property valuations using cutting-edge technology and real-time market data</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-value">99.7%</span>
+          <span class="stat-label">Accuracy Rate</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">50K+</span>
+          <span class="stat-label">Properties Assessed</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">24/7</span>
+          <span class="stat-label">Real-time Updates</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Advanced Assessment Section -->
+  <main>
+    <section class="assessment-section enhanced">
+      <div class="container">
+        <h2>Smart Property Valuation</h2>
+        <p class="section-subtitle">Get instant property valuations using our AI-powered assessment tools</p>
+        
+        <div class="assessment-grid">
+          <div class="assessment-form-card">
+            <h3>Property Details</h3>
+            <form id="assessmentForm" class="enhanced-form">
+              <div class="form-group">
+                <label for="location">Property Location</label>
+                <div class="input-with-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <input type="text" id="location" name="location" placeholder="Enter full address" required>
+                </div>
+                <div class="location-suggestions" id="locationSuggestions"></div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="propertyType">Property Type</label>
+                  <select id="propertyType" name="propertyType" required>
+                    <option value="">Select Type</option>
+                    <option value="residential-house">Residential House</option>
+                    <option value="apartment">Apartment</option>
+                    <option value="land">Land</option>
+                    <option value="commercial">Commercial</option>
+                    <option value="industrial">Industrial</option>
+                    <option value="mixed-use">Mixed Use</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="size">Size (sq ft)</label>
+                  <div class="input-with-icon">
+                    <i class="fas fa-expand-arrows-alt"></i>
+                    <input type="number" id="size" name="size" placeholder="0" min="0" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="bedrooms">Bedrooms</label>
+                  <select id="bedrooms" name="bedrooms">
+                    <option value="">Select</option>
+                    <option value="0">Studio</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5+</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="bathrooms">Bathrooms</label>
+                  <select id="bathrooms" name="bathrooms">
+                    <option value="">Select</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4+</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="yearBuilt">Year Built</label>
+                <input type="number" id="yearBuilt" name="yearBuilt" placeholder="2020" min="1900" max="2025">
+              </div>
+
+              <div class="form-group">
+                <label for="features">Additional Features</label>
+                <div class="checkbox-group">
+                  <label><input type="checkbox" name="features" value="pool"> Swimming Pool</label>
+                  <label><input type="checkbox" name="features" value="garage"> Garage</label>
+                  <label><input type="checkbox" name="features" value="garden"> Garden</label>
+                  <label><input type="checkbox" name="features" value="security"> Security System</label>
+                  <label><input type="checkbox" name="features" value="elevator"> Elevator</label>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-primary assessment-btn">
+                <i class="fas fa-calculator"></i> Get Instant Valuation
+              </button>
+            </form>
+          </div>
+
+          <div class="assessment-results-card">
+            <h3>Valuation Results</h3>
+            <div id="assessmentResult" class="result-display">
+              <div class="placeholder-content">
+                <i class="fas fa-chart-line fa-3x"></i>
+                <p>Enter property details to get instant valuation</p>
+              </div>
+            </div>
+            
+            <div class="result-details hidden">
+              <div class="price-display">
+                <span class="price-label">Estimated Value</span>
+                <span class="price-value" id="estimatedPrice">₦0</span>
+              </div>
+              
+              <div class="market-insights">
+                <h4>Market Insights</h4>
+                <div class="insight-item">
+                  <span class="insight-label">Price per sq ft</span>
+                  <span class="insight-value" id="pricePerSqFt">₦0</span>
+                </div>
+                <div class="insight-item">
+                  <span class="insight-label">Market trend</span>
+                  <span class="insight-value" id="marketTrend">Stable</span>
+                </div>
+                <div class="insight-item">
+                  <span class="insight-label">Confidence level</span>
+                  <span class="insight-value" id="confidenceLevel">95%</span>
+                </div>
+              </div>
+              
+              <div class="action-buttons">
+                <button class="btn-secondary" onclick="saveAssessment()">
+                  <i class="fas fa-save"></i> Save Assessment
+                </button>
+                <button class="btn-outline" onclick="shareAssessment()">
+                  <i class="fas fa-share"></i> Share Results
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Advanced Features -->
+        <div class="advanced-features">
+          <h3>Advanced Features</h3>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <i class="fas fa-camera"></i>
+              <h4>Property Images</h4>
+              <p>Upload photos for more accurate assessment</p>
+              <input type="file" id="propertyImages" multiple accept="image/*" class="file-input">
+            </div>
+            
+            <div class="feature-card">
+              <i class="fas fa-map"></i>
+              <h4>Location Analysis</h4>
+              <p>Get detailed neighborhood insights</p>
+              <button class="btn-outline" onclick="analyzeLocation()">Analyze Area</button>
+            </div>
+            
+            <div class="feature-card">
+              <i class="fas fa-chart-bar"></i>
+              <h4>Market Trends</h4>
+              <p>View historical price data</p>
+              <button class="btn-outline" onclick="viewTrends()">View Trends</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <h2>Ready to Get Started?</h2>
+        <p>Our advanced assessment tools are ready to help you make informed property decisions</p>
+        <div class="cta-actions">
+          <a href="#assessmentForm" class="btn-primary">Start Assessment</a>
+          <a href="agents.html" class="btn-secondary">Contact an Agent</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 AssetPlane - Advanced Property Assessment Platform</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+  <script>
+    // Assessment functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('assessmentForm');
+      const resultDisplay = document.getElementById('assessmentResult');
+      
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Simulate API call for property valuation
+        const formData = new FormData(form);
+        const location = formData.get('location');
+        const propertyType = formData.get('propertyType');
+        const size = parseInt(formData.get('size')) || 0;
+        
+        // Simulate valuation calculation
+        const basePrice = {
+          'residential-house': 50000,
+          'apartment': 45000,
+          'land': 30000,
+          'commercial': 80000,
+          'industrial': 60000,
+          'mixed-use': 70000
+        };
+        
+        const estimatedValue = basePrice[propertyType] * size * (1 + Math.random() * 0.3);
+        
+        // Display results
+        document.querySelector('.placeholder-content').classList.add('hidden');
+        document.querySelector('.result-details').classList.remove('hidden');
+        
+        document.getElementById('estimatedPrice').textContent = `₦${estimatedValue.toLocaleString()}`;
+        document.getElementById('pricePerSqFt').textContent = `₦${Math.round(estimatedValue/size).toLocaleString()}`;
+        document.getElementById('marketTrend').textContent = Math.random() > 0.5 ? 'Rising' : 'Stable';
+        document.getElementById('confidenceLevel').textContent = '95%';
+      });
+      
+      // Location suggestions
+      document.getElementById('location').addEventListener('input', (e) => {
+        const suggestions = document.getElementById('locationSuggestions');
+        if (e.target.value.length > 2) {
+          suggestions.innerHTML = `
+            <div class="suggestion-item">Victoria Island, Lagos</div>
+            <div class="suggestion-item">Lekki, Lagos</div>
+            <div class="suggestion-item">Ikoyi, Lagos</div>
+          `;
+          suggestions.style.display = 'block';
+        } else {
+          suggestions.style.display = 'none';
+        }
+      });
+      
+      // Advanced features
+      window.saveAssessment = () => {
+        alert('Assessment saved successfully!');
+      };
+      
+      window.shareAssessment = () => {
+        alert('Sharing functionality coming soon!');
+      };
+      
+      window.analyzeLocation = () => {
+        alert('Location analysis feature coming soon!');
+      };
+      
+      window.viewTrends = () => {
+        alert('Market trends feature coming soon!');
+      };
+    });
+  </script>
+</body>
+</html>

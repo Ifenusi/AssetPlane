@@ -1,0 +1,167 @@
+/* AssetPlane Dark Mode - World's Best Real Estate Platform */
+
+:root {
+  /* Light Mode Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  
+  /* Dark Mode Colors */
+  --dark-bg-primary: #0f172a;
+  --dark-bg-secondary: #1e293b;
+  --dark-bg-tertiary: #334155;
+  --dark-text-primary: #f8fafc;
+  --dark-text-secondary: #cbd5e1;
+  --dark-text-muted: #94a3b8;
+  --dark-border-color: #475569;
+  --dark-shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] {
+  --bg-primary: var(--dark-bg-primary);
+  --bg-secondary: var(--dark-bg-secondary);
+  --bg-tertiary: var(--dark-bg-tertiary);
+  --text-primary: var(--dark-text-primary);
+  --text-secondary: var(--dark-text-secondary);
+  --text-muted: var(--dark-text-muted);
+  --border-color: var(--dark-border-color);
+  --shadow-color: var(--dark-shadow-color);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  z-index: 1001;
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-normal);
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-xl);
+}
+
+.theme-toggle i {
+  font-size: 1.5rem;
+}
+
+/* Dark Mode Styles */
+[data-theme="dark"] body {
+  background-color: var(--dark-bg-primary);
+  color: var(--dark-text-primary);
+}
+
+[data-theme="dark"] .navbar {
+  background-color: var(--dark-bg-secondary);
+  border-bottom: 1px solid var(--dark-border-color);
+}
+
+[data-theme="dark"] .hero {
+  background: linear-gradient(135deg, #1e293b, #334155);
+}
+
+[data-theme="dark"] .feature-card,
+[data-theme="dark"] .service-card,
+[data-theme="dark"] .property-card {
+  background: var(--dark-bg-secondary);
+  border: 1px solid var(--dark-border-color);
+}
+
+[data-theme="dark"] .feature-card:hover,
+[data-theme="dark"] .service-card:hover,
+[data-theme="dark"] .property-card:hover {
+  border-color: var(--primary-blue);
+}
+
+[data-theme="dark"] .btn-primary {
+  background: var(--accent-gold);
+  color: var(--dark-bg-primary);
+}
+
+[data-theme="dark"] .btn-secondary {
+  background: transparent;
+  color: var(--accent-gold);
+  border-color: var(--accent-gold);
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+  background: var(--accent-gold);
+  color: var(--dark-bg-primary);
+}
+
+[data-theme="dark"] footer {
+  background: var(--dark-bg-secondary);
+  border-top: 1px solid var(--dark-border-color);
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  background: var(--dark-bg-tertiary);
+  color: var(--dark-text-primary);
+  border-color: var(--dark-border-color);
+}
+
+[data-theme="dark"] input:focus,
+[data-theme="dark"] select:focus,
+[data-theme="dark"] textarea:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+}
+
+/* Smooth Theme Transition */
+* {
+  transition: background-color var(--transition-slow), 
+              color var(--transition-slow), 
+              border-color var(--transition-slow);
+}
+
+/* Dark Mode Specific Enhancements */
+[data-theme="dark"] .property-badge {
+  color: var(--dark-bg-primary);
+}
+
+[data-theme="dark"] .modal-content {
+  background: var(--dark-bg-secondary);
+  border: 1px solid var(--dark-border-color);
+}
+
+[data-theme="dark"] .close {
+  color: var(--dark-text-muted);
+}
+
+[data-theme="dark"] .close:hover {
+  color: var(--dark-text-primary);
+}
+
+/* Dark Mode Scrollbar */
+[data-theme="dark"] ::-webkit-scrollbar {
+  width: 8px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--dark-bg-secondary);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--dark-border-color);
+  border-radius: 4px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-blue);
+}

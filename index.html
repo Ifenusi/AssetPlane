@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AssetPlane - World's Best Real Estate Platform</title>
+ 
+  <link rel="stylesheet" href="design-system.css">
+  
+  <link rel="stylesheet" href="dark-mode.css">
+  <link rel="stylesheet" href="navbar-fixes.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="icon" href="logo.png" type="image/png">
+</head>
+<body>
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" aria-label="Toggle dark mode">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <!-- Professional Navigation -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="AssetPlane Logo">
+        <span>AssetPlane</span>
+      </a>
+      <ul class="nav-links" id="nav-links" style = "margin-left: 100px;">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="properties.html">Properties</a></li>
+        <li><a href="listings.html">Listings</a></li>
+        <li><a href="assessments.html">Assessments</a></li>
+        <li><a href="agents.html">Agents</a></li>
+        <li><a href="KrafftTalk.html">KrafftTalk</a></li>
+        <li><a href="geo-verification.html">Geo-Verification</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="menu-toggle" id="mobile-menu">
+        <i class="fas fa-bars"></i>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Welcome to AssetPlane</h1>
+      <p>The World's Best Real Estate Platform</p>
+      <div class="hero-actions">
+        <a href="properties.html" class="btn-primary">Explore Properties</a>
+        <a href="#features" class="btn-secondary">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <div class="container">
+      <h2>Why Choose AssetPlane?</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <i class="fas fa-home fa-3x"></i>
+          <h3>Premium Properties</h3>
+          <p>Access the finest properties worldwide with verified listings and professional photography.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-chart-line fa-3x"></i>
+          <h3>Market Insights</h3>
+          <p>Get real-time market data and AI-powered property valuations.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-users fa-3x"></i>
+          <h3>Expert Agents</h3>
+          <p>Connect with certified real estate professionals worldwide.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-shield-alt fa-3x"></i>
+          <h3>Secure Transactions</h3>
+          <p>Blockchain-verified property records and secure payment processing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- QUOTES SECTION -->
+<section class="quotes-section">
+  <h2 class="section-title">Real Estate Wisdom</h2>
+  <div class="quotes-carousel" id="quotesCarousel">
+    <div class="quote">"Ninety percent of all millionaires become so through owning real estate." – Andrew Carnegie</div>
+    <div class="quote">"Don’t wait to buy real estate. Buy real estate and wait." – Will Rogers</div>
+    <div class="quote">"Owning a home is a keystone of wealth — both financial affluence and emotional security." – Suze Orman</div>
+    <div class="quote">"Landlords grow rich in their sleep." – John Stuart Mill</div>
+    <div class="quote">"The best investment on Earth is earth." – Louis Glickman</div>
+    <div class="quote">"Real estate cannot be lost or stolen, nor can it be carried away. It is about the safest investment in the world." – Franklin D. Roosevelt</div>
+    <div class="quote">"Location, location, location." – Harold Samuel</div>
+    <div class="quote">"He is not a full man who does not own a piece of land." – Hebrew Proverb</div>
+  </div>
+</section>
+
+<!-- STYLES -->
+<style>
+.quotes-section {
+  background: #f9f9f9;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #222;
+}
+
+.quotes-carousel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 120px;
+  overflow: hidden;
+  position: relative;
+}
+
+.quote {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #444;
+  margin: 10px 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  position: absolute;
+}
+</style>
+
+<!-- SCRIPT -->
+<script>
+const quotes = document.querySelectorAll("#quotesCarousel .quote");
+let currentQuote = 0;
+
+function showQuote(index) {
+  quotes.forEach((q, i) => {
+    q.style.opacity = (i === index) ? "1" : "0";
+  });
+}
+
+function nextQuote() {
+  currentQuote = (currentQuote + 1) % quotes.length;
+  showQuote(currentQuote);
+}
+
+// Show first quote
+showQuote(currentQuote);
+
+// Rotate every 5 seconds
+setInterval(nextQuote, 5000);
+</script>
+
+
+
+
+  <!-- Quick Search -->
+  <section class="quick-search">
+    <div class="container">
+      <h2>Find Your Dream Property</h2>
+      <div class="search-box">
+        <input type="text" id="globalSearch" placeholder="Search by location, property type, or price...">
+        <button class="search-btn" onclick="performSearch()">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+      <div id="searchResults" class="search-results"></div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <h2>Ready to Start Your Real Estate Journey?</h2>
+      <p>Join thousands of satisfied clients worldwide</p>
+      <div class="cta-actions">
+        <a href="listings.html" class="btn-primary">Browse Properties</a>
+        <a href="contact.html" class="btn-secondary">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <div class="container">
+      <h2>Stay Updated</h2>
+      <p>Get the latest market insights and property alerts</p>
+      <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+        <input type="email" placeholder="Enter your email" required>
+        <button type="submit" class="btn-primary">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>AssetPlane</h3>
+          <p>The world's most advanced real estate platform</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="listings.html">Properties</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact</h4>
+          <p>Email: info@assetplane.com</p>
+          <p>Phone: +234 81 3936 3101</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 AssetPlane - World's Best Real Estate Platform</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-indicator"></div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+  <script src="navbar.js"></script>
+  <script>
+    // Additional page-specific functionality
+    function performSearch() {
+      const query = document.getElementById('globalSearch').value;
+      if (query.trim()) {
+        window.location.href = `listings.html?search=${encodeURIComponent(query)}`;
+      }
+    }
+
+    function handleNewsletter(e) {
+      e.preventDefault();
+      const email = e.target.querySelector('input[type="email"]').value;
+      alert(`Thank you for subscribing with ${email}! You'll receive our latest updates.`);
+      e.target.reset();
+    }
+
+    // Initialize theme on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      
+      const themeToggle = document.querySelector('.theme-toggle');
+      const icon = themeToggle.querySelector('i');
+      icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    });
+  </script>
+</body>
+</html>
